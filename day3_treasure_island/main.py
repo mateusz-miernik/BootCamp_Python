@@ -27,20 +27,23 @@ if __name__ == "__main__":
     ''')
     print("Welcome to Treasure Island.")
     print("Your mission is to find the treasure.")
-    move = input("Left or right? ")
+    move = input("You\'re at crossroad, where do you want to go? Type 'left' or 'right'.\n")
+
     if move.lower() == "left":
-        move = input("Swim or wait? ")
+        move = input("You\'ve come to a lake. There is an island in the middle of the lake. "
+                     "Type 'wait' to wait for a boat. Type 'swim' to swim across.\n")
         if move.lower() == "wait":
-            move = input("Which door? Red, Blue or Yellow? ")
+            move = input("You arrive at the island unharmed. There is a house with 3 doors. "
+                         "One red, one yellow and one blue. Which colour do you choose?\n")
             if move.lower() == "yellow":
-                print("You Win!")
+                print("You found the treasure! You Win!")
             elif move.lower() == "red":
-                print("Burned by fire. Game Over.")
+                print("It's a room full of fire. Game Over.")
             elif move.lower() == "blue":
-                print("Eaten by beasts. Game Over.")
+                print("You enter a room of beasts. Game Over.")
             else:
                 print("Game Over.")
         else:
-            print("Attacked by trout. Game Over.")
+            print("You got attacked by an angry trout. Game Over.")
     else:
-        print("Fall into a hole. Game Over.")
+        print("You fell into a hole. Game Over.")
