@@ -15,13 +15,19 @@ def draw_cards(user_cards: List, computer_cards: List, cards: List, which_hand: 
     elif which_hand == "next":
         num_of_draws = 1
     else:
-        num_of_draws = 2
+        num_of_draws = 10
 
-    for i in range(num_of_draws):
+    for _ in range(num_of_draws):
         if which_hand == "first" or which_hand == "next":
             user_cards.append(r.choice(cards))
+            if user_cards[-1] == 11 and sum(user_cards) > 21:
+                user_cards[-1] = 1
         else:
             computer_cards.append(r.choice(cards))
+            if computer_cards[-1] == 11 and sum(computer_cards) > 21:
+                computer_cards[-1] = 1
+            elif sum(computer_cards) > 18:
+                break
 
     if which_hand == "first" or which_hand == "next":
         print(f"\tYour cards: {user_cards}, current score {sum(user_cards)}")
