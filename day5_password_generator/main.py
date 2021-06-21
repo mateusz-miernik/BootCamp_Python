@@ -15,7 +15,7 @@ if __name__ == "__main__":
     list_with_letters = [rand.choice(ascii_letters) for i in range(num_of_letters)]
     list_with_symbols = [rand.choice(punctuation) for i in range(num_of_symbols)]
     list_with_numbers = [rand.choice(digits) for i in range(num_of_numbers)]
-    password_elements = list(chain(*[list_with_symbols, list_with_numbers, list_with_letters]))
+    password_elements = list(chain(list_with_symbols, list_with_numbers, list_with_letters))
     rand.shuffle(password_elements)
     password = "".join(str(item) for item in password_elements)
     print(f"Here is your password: {password}")
