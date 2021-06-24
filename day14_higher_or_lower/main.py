@@ -21,27 +21,27 @@ def play_game() -> None:
                            "or 'B' if you think second one is more famous: ")
 
         if first_object['follower_count'] > second_object['follower_count']:
-            if your_guess == 'A':
-                print('You guessed right!')
+            if your_guess.lower() == 'a':
+                print('You guessed right!\n')
                 score += 1
             else:
-                print('Wrong answer!')
+                print('Wrong answer!\n')
                 break
         else:
-            if your_guess == 'B':
-                print('You guessed right!')
+            if your_guess.lower() == 'b':
+                print('You guessed right!\n')
                 score += 1
             else:
-                print('Wrong answer!')
+                print('Wrong answer!\n')
                 break
 
     print(f"You get {score} in this round.")
     if score > 5:
-        print("You are good player! :)")
+        print("You are a good player! :)")
     else:
         print("Your score is embarrassing! :(")
 
-    more_game = input("Wanna play again? Type 'y' if yes or anything else if not: ")
+    more_game = input("Do you wanna play again? Type 'y' if yes or anything else if not: ")
 
     if more_game == 'y':
         play_game()
