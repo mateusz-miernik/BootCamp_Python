@@ -37,17 +37,23 @@ resources = {
 
 
 def _print_report(current_resources):
-    #   TODO: Create a function which prints report with info about current resources availability.
+    """
+        Function which prints report with info about current resources availability.
+    """
     for name, amount in current_resources.items():
         if name == "coffee":
             unit = "g"
-        else:
+        elif name in ("water", "milk"):
             unit = "ml"
+        else:
+            unit = "$"
         print(f"{name}: {amount}{unit}")
 
 
 def _check_resources(coffee_type):
-    #   TODO: Create a function which check if there are enough resources for preparing a coffee.
+    """
+        Function which check if there are enough resources for preparing a coffee.
+    """
     for name, amount in resources.items():
         if name in MENU[coffee_type]["ingredients"].keys():
             if amount < MENU[coffee_type]["ingredients"][name]:
@@ -56,7 +62,10 @@ def _check_resources(coffee_type):
     return True
 
 
-def _process_coins(coffee_type):
+def _process_coins(coffee_type, current_resources):
+    """
+        Function for processing coins in coffee machine.
+    """
     quarters = int(input("How many quarters? "))
     dimes = int(input("How many dimes? "))
     nickles = int(input("How many nickles? "))
@@ -67,30 +76,37 @@ def _process_coins(coffee_type):
     if total_money >= coffee_cost:
         change = total_money - coffee_cost
         print(f"Here is your change {round(change, 2)}$")
+        if "money" not in current_resources:
+            current_resources["money"] = 0
+        current_resources["money"] += coffee_cost
         return True
     else:
         print(f"Not enough money to make a {coffee_type}. Returning your money.. -> {total_money}$")
         return False
 
 
-def _prepare_coffee(coffee_type):
-    #   TODO: Create a function which prepares coffees and decrease resources.
+def _prepare_coffee(coffee_type, current_resources):
+    """
+        Function which prepares coffees and decrease resources.
+    """
     if _check_resources(coffee_type):
-        if _process_coins(coffee_type):
+        if _process_coins(coffee_type, current_resources):
             for ingredient, amount in MENU[coffee_type]["ingredients"].items():
                 resources[ingredient] = resources[ingredient] - amount
             print("Here is your coffee ☕. Enjoy!")
 
 
 def coffee_machine():
-    #   TODO: This is main function of coffee machine program.
+    """
+        Main function of coffee machine program.
+    """
     is_work_finished = False
     print("Good morning. I'm coffee machine")
 
     while not is_work_finished:
         choice = input("\nWhat would you like? (espresso/latte/cappuccino): ")
         if choice in MENU.keys():
-            _prepare_coffee(choice)
+            _prepare_coffee(choice, resources)
         elif choice == "report":
             _print_report(resources)
         elif choice == "off":
