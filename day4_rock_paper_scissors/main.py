@@ -44,8 +44,9 @@ if __name__ == "__main__":
             continue
         else:
             computer_choice = rand.randint(0, 2)
+            print("\nYou choose:")
             print(game_images[user_choice])
-            print("Computer chose:\n")
+            print("\nComputer chose:")
             print(game_images[computer_choice])
 
             if user_choice == 0 and computer_choice == 2:
@@ -61,6 +62,5 @@ if __name__ == "__main__":
                 print("You win! Congratulations!")
                 break
             elif user_choice == computer_choice:
-                print(game_images[computer_choice])
                 print("It's a draw! Try again..")
                 continue
