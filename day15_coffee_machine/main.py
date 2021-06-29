@@ -2,6 +2,7 @@
     DAY 15: Coffee Machine
 """
 
+from typing import Dict
 
 MENU = {
     "espresso": {
@@ -36,7 +37,7 @@ resources = {
 }
 
 
-def _print_report(current_resources):
+def _print_report(current_resources: Dict) -> None:
     """
         Function which prints report with info about current resources availability.
     """
@@ -50,7 +51,7 @@ def _print_report(current_resources):
         print(f"{name}: {amount}{unit}")
 
 
-def _check_resources(coffee_type):
+def _check_resources(coffee_type: str) -> bool:
     """
         Function which check if there are enough resources for preparing a coffee.
     """
@@ -62,7 +63,7 @@ def _check_resources(coffee_type):
     return True
 
 
-def _process_coins(coffee_type, current_resources):
+def _process_coins(coffee_type: str, current_resources: Dict) -> bool:
     """
         Function for processing coins in coffee machine.
     """
@@ -85,7 +86,7 @@ def _process_coins(coffee_type, current_resources):
         return False
 
 
-def _prepare_coffee(coffee_type, current_resources):
+def _prepare_coffee(coffee_type: str, current_resources: Dict) -> None:
     """
         Function which prepares coffees and decrease resources.
     """
@@ -93,10 +94,10 @@ def _prepare_coffee(coffee_type, current_resources):
         if _process_coins(coffee_type, current_resources):
             for ingredient, amount in MENU[coffee_type]["ingredients"].items():
                 resources[ingredient] = resources[ingredient] - amount
-            print("Here is your coffee ☕. Enjoy!")
+            print(f"Here is your {coffee_type} ☕. Enjoy!")
 
 
-def coffee_machine():
+def coffee_machine() -> None:
     """
         Main function of coffee machine program.
     """
