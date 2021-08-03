@@ -1,12 +1,20 @@
 from question_model import Question
-from data import question_data
+from new_data import question_data
 from quiz_brain import QuizBrain
+import textwrap
+
+
+def wrap(s, w):
+    return textwrap.fill(s, w)
+
 
 if __name__ == "__main__":
-    for item in question_data:
-        question = Question(item["text"], item["answer"])
-        quiz = QuizBrain(question)
-        quiz.ask_question()
+    question_bank = [Question(wrap(question["question"], 75), question["correct_answer"])
+                     for question in question_data['results']]
+    quiz = QuizBrain(question_bank)
+
+    while quiz.still_has_questions():
+        quiz.next_question()
 
     print("You've completed the quiz")
-    print(f"Your final score was: {QuizBrain.current_score}/{QuizBrain.question_number}")
+    print(f"Your final score was: {quiz.current_score}/{quiz.question_number}")

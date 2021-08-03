@@ -1,21 +1,27 @@
 class QuizBrain:
-    question_number = 0
-    current_score = 0
 
-    def __init__(self, question_obj):
-        self.question_obj = question_obj
-        QuizBrain.question_number += 1
+    def __init__(self, q_list):
+        self.question_list = q_list
+        self.question_number = 0
+        self.current_score = 0
+        self.current_question = None
+
+    def still_has_questions(self):
+        return len(self.question_list) > self.question_number
 
     def _process_answer(self, answer):
-        if answer == self.question_obj.answer:
-            QuizBrain.current_score += 1
+        if answer == self.current_question.answer:
+            self.current_score += 1
             print("You got it right!")
         else:
             print("That's wrong.")
 
-        print(f"The correct answer was: {self.question_obj.answer}")
-        print(f"Your current score is: {QuizBrain.current_score}/{QuizBrain.question_number}\n")
+        print(f"The correct answer was: {self.current_question.answer}")
+        print(f"Your current score is: {self.current_score}/{self.question_number}\n")
 
-    def ask_question(self):
-        user_answer = input(f"Q.{QuizBrain.question_number}: {self.question_obj.text}. (True/False): ").capitalize()
+    def next_question(self):
+        self.current_question = self.question_list[self.question_number]
+        user_answer = input(f"Q.{self.question_number+1}: "
+                            f"{self.current_question.text}. (True/False): ").capitalize()
+        self.question_number += 1
         self._process_answer(user_answer)
