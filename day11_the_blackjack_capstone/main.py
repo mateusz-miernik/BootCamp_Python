@@ -62,7 +62,7 @@ def main() -> None:
     cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
     user_cards, computer_cards = [], []
     is_game_finished = False
-    game_over = False
+    is_round_finished = False
     which_hand = "first"
     initial_choice = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
     if initial_choice != "y":
@@ -71,9 +71,9 @@ def main() -> None:
     while not is_game_finished:
         if which_hand == "first":
             print(logo, "\n")
-            game_over = draw_cards(user_cards, computer_cards, cards, which_hand)
+            is_round_finished = draw_cards(user_cards, computer_cards, cards, which_hand)
 
-        if game_over:
+        if is_round_finished:
             new_round = input("Do you want to play a game of Blackjack? Type 'y' or 'n': ")
             if new_round == "y":
                 which_hand = "first"
@@ -92,7 +92,7 @@ def main() -> None:
         else:
             which_hand = "final"
 
-        game_over = draw_cards(user_cards, computer_cards, cards, which_hand)
+        is_round_finished = draw_cards(user_cards, computer_cards, cards, which_hand)
 
 
 if __name__ == "__main__":
