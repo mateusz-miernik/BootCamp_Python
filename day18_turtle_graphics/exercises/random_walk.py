@@ -18,19 +18,20 @@ class RandomWalk:
         self.colors = all_colors
         self.directions_with_angles = {"NORTH": 90, "WEST": 180, "SOUTH": 270, "EAST": 360}
         self.directions = list(self.directions_with_angles.keys())
+        self.steps_after_exceeding_screen = 5
+        self.up_max, self.down_max, self.left_max, self.right_max = \
+            self.height/2, -self.height/2, -self.width/2, self.width/2
 
     def _movement_control(self, distance):
         # print(f"Current position X: {self.turtle_obj.xcor()}, Y: {self.turtle_obj.ycor()}")
-        up_max, down_max, left_max, right_max = self.height/2, -self.height/2, -self.width/2, self.width/2
-        steps_after_exceeding_screen = 5
 
-        if self.turtle_obj.xcor() > right_max:
+        if self.turtle_obj.xcor() > self.right_max:
             direction = "WEST"
-        elif self.turtle_obj.xcor() < left_max:
+        elif self.turtle_obj.xcor() < self.left_max:
             direction = "EAST"
-        elif self.turtle_obj.ycor() > up_max:
+        elif self.turtle_obj.ycor() > self.up_max:
             direction = "SOUTH"
-        elif self.turtle_obj.ycor() < down_max:
+        elif self.turtle_obj.ycor() < self.down_max:
             direction = "NORTH"
         else:
             direction = ""
@@ -43,7 +44,7 @@ class RandomWalk:
 
         if is_out_of_screen:
             self.turtle_obj.pu()
-            for _ in range(steps_after_exceeding_screen):
+            for _ in range(self.steps_after_exceeding_screen):
                 self.turtle_obj.fd(distance)
             self.turtle_obj.pd()
         else:
