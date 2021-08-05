@@ -48,7 +48,7 @@ class RandomWalk:
         else:
             self.turtle_obj.forward(distance)
 
-    def _set_random_color(self):
+    def _set_random_color(self) -> None:
         color = choice(self.colors)
         self.turtle_obj.color(color)
 
